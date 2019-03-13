@@ -1,5 +1,6 @@
 {
   "name": "m",
+  "homepage": "https://ezio17.github.io/star-wars-api/build/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
