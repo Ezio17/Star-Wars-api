@@ -61,7 +61,7 @@ class PlanetsInfo extends React.Component {
               </div>
             </div>
             :
-            <h1 className="red loading">Loading...</h1>
+            <h1 className="loading">Loading...</h1>
           }
         </>
       </>
