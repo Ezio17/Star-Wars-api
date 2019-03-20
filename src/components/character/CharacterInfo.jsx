@@ -13,7 +13,6 @@ class CharacterInfo extends React.Component {
       isLoading: false,
       images: null,
     }
-
   }
 
   async componentDidMount() {
