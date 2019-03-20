@@ -1,4 +1,5 @@
 import React from 'react'
+import queryString from 'query-string'
 
 import Fetch from '../../details/Fetch';
 import Menu from '../Menu'
@@ -21,21 +22,23 @@ class Films extends React.Component {
   async componentDidMount() {
     const { location } = this.props;
     const items = await Fetch('https://swapi.co/api/films/' + location.search)
-    const staticUrl = 'https://starwars-visualguide.com/assets/img/films/';
+    const staticUrl = 'https://starwars-visualguide.com/assets/img/films/'
     const pages = Math.ceil(items.count / 10)
+    const numberPage = queryString.parse(this.props.location.search)
 
     this.setState({
       items: items.results,
       isLoading: true,
       images: staticUrl,
       pages,
+      currentPage: numberPage.page,
     })
   }
 
   async componentDidUpdate() {
     const { location } = this.props;
     const items = await Fetch('https://swapi.co/api/films/' + location.search)
-    const currentPage = location.search.match(/\d+/g)
+    const numberPage = queryString.parse(location.search)
 
     if (items.results[0].name === this.state.items[0].name) {
       return;
@@ -43,7 +46,7 @@ class Films extends React.Component {
 
     this.setState({
       items: items.results,
-      currentPage,
+      currentPage: numberPage.page,
     });
   }
 

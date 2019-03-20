@@ -1,4 +1,5 @@
 import React from 'react'
+import queryString from 'query-string'
 
 import Fetch from '../../details/Fetch';
 import Menu from '../Menu'
@@ -23,19 +24,21 @@ class Vehicles extends React.Component {
     const items = await Fetch('https://swapi.co/api/vehicles/' + location.search)
     const images = 'https://starwars-visualguide.com/assets/img/vehicles/'
     const pages = Math.ceil(items.count / 10)
+    const numberPage = queryString.parse(this.props.location.search)
 
     this.setState({
       items: items.results,
       isLoading: true,
       images,
       pages,
+      currentPage: numberPage.page,
     })
   }
 
   async componentDidUpdate() {
     const { location } = this.props;
     const items = await Fetch('https://swapi.co/api/vehicles/' + location.search)
-    const currentPage = location.search.match(/\d+/g)
+    const numberPage = queryString.parse(this.props.location.search)
 
     if (items.results[0].name === this.state.items[0].name) {
       return;
@@ -43,7 +46,7 @@ class Vehicles extends React.Component {
 
     this.setState({
       items: items.results,
-      currentPage,
+      currentPage: numberPage.page,
     });
   }
 
