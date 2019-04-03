@@ -1,4 +1,4 @@
-# tabs-react
+# star-wars-api
 
 - [preview](https://ezio17.github.io/star-wars-api/build/)
 
